@@ -36,8 +36,9 @@ Run `.help config automod` to start!
 
 You can add roles, members, and channels to the ignored list.
 
-!!! note 
-    If you add a channel to the ignored list, AutoMod will ignore all messages in that channel.
+{% hint style="info" %}
+If you add a channel to the ignored list, AutoMod will ignore all messages in that channel.
+{% endhint %}
 
 ### Removing an ignore
 

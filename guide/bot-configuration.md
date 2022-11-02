@@ -8,22 +8,6 @@ By default, the bot's prefix is it's mention (@Lightning) and cannot be removed.
 
 Run `@Lightning config prefix` to manage custom prefixes in a nice menu!
 
-## Feature Flags
-
-Certain features are disabled by default. You can toggle a feature on with `.config toggle <feature>`.
-
-### InvokeDelete
-
-Removes command invocation messages after successful execution.
-
-You can toggle this feature on by passing "invoke delete" for the feature argument.
-
-### RoleSaver
-
-Saves a user's roles when they leave a server. When the user rejoins the server again, the bot will try to apply all the roles they had.
-
-You can toggle this feature on or off by passing "role saver" for the feature argument.
-
 ## Logging
 
 ### Events

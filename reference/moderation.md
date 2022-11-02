@@ -86,9 +86,9 @@ If you want specific infractions that were done to a user, use `.inf list member
 If you want specific infractions that were done by a moderator, use `.inf list takenby <member>`.
 
 
-!!! tip
-    If you want to view a specific infraction, use `.inf view <id>`
-
+{% hint style="info" %}
+If you want to view a specific infraction, use `.inf view <id>`
+{% endhint %}
 
 ```
 .inf list takenby @Moderator4#6781

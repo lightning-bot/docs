@@ -2,7 +2,7 @@
 
 These are general instructions to self host the bot.
 
-**Clone the repository with git.**
+**Clone the repository with git**
 
 `git clone https://gitlab.com/lightning-bot/Lightning.git`
 
@@ -42,19 +42,16 @@ These are general instructions to self host the bot.
 
 - **Create the database in PostgreSQL**
 
-!!! tip ""
-    You will need PostgreSQL installed. Type the following in the `psql` tool
-    ```sql
-    CREATE ROLE lightningbot WITH LOGIN PASSWORD 'somepasswordtoset';
-    CREATE DATABASE lightning OWNER lightningbot;
-    ```
+You will need PostgreSQL installed. Type the following in the `psql` tool
+```sql
+CREATE ROLE lightningbot WITH LOGIN PASSWORD 'somepasswordtoset';
+CREATE DATABASE lightning OWNER lightningbot;
+```
 
 - **Configure the bot & setup the database tables**
     - Configure the `example-config.toml` file and rename it to `config.toml`
+    - Run `poetry run lightning db upgrade` to initialize the database.
 
-!!! tip
-    Run `poetry run lightning db upgrade` to initialize the database.
-    
 - **Activate the venv and run the bot**
     - Run `poetry run lightning`.
     Alternatively, you can do `poetry run python3 -m lightning`
