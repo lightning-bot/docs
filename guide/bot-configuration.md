@@ -56,7 +56,7 @@ A format based on an emoji style of logging.
 {% endtab %}
 {% endtabs %}
 
-To configure the format, use `.config logging` and follow the prompts.
+To configure the format, use `.modlog` and follow the prompts.
 
 
 ## Fine-Tuned Command Permissions

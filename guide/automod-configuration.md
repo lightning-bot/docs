@@ -4,7 +4,7 @@ Lightning's AutoMod can be setup via message commands!
 
 ---
 
-Run `.help config automod` to start!
+Run `.help automod` to start!
 
 ## Automod Types Reference
 
@@ -20,19 +20,19 @@ Run `.help config automod` to start!
 
 ![Example usage](../assets/rules_add.gif)
 
-- `config automod rules add`
+- `automod rules add`
 
 ## Removing an AutoMod rule
 
 ![Example usage](../assets/rules_remove.gif)
 
-- `config automod rules remove`
+- `automod rules remove`
 
 ## AutoMod Ignores
 
 ### Setting up AutoMod ignores
 
-- `config automod ignore`
+- `automod ignore`
 
 You can add roles, members, and channels to the ignored list.
 
@@ -42,10 +42,11 @@ If you add a channel to the ignored list, AutoMod will ignore all messages in th
 
 ### Removing an ignore
 
-- `config automod unignore`
+- `automod unignore`
 
-!!! tip
-    If you don't know what is currently ignored, use `config automod ignored`
+{% hint style="info" %}
+If you don't know what is currently ignored, use `automod ignored`
+{% endhint %}
 
 ### Who is ignored by AutoMod?
 
