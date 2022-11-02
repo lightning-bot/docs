@@ -30,25 +30,31 @@ Run `@Lightning config prefix` to manage custom prefixes in a nice menu!
 
 Lightning includes 4 formats in which you can receive logs.
 
-=== "Minimalistic with Timestamp (default)"
-    A simple, minimal format.
+{% tabs %}
+{% tab title="Minimalistic with Timestamp (default)" %}
+A simple, minimal format.
 
-    ![Example Image](../assets/minimal.png)
+![Example Image](../assets/minimal.png)
+{% endtab %}
 
-=== "Minimalistic without Timestamp"
-    Same as minimalistic except it doesn't include a timestamp.
+{% tab title="Minimalistic without Timestamp" %}
+Same as minimalistic except it doesn't include a timestamp.
 
-    ![Example Image](../assets/minimal2.png)
+![Example Image](../assets/minimal2.png)
+{% endtab %}
 
-=== "Embed"
-    An embedded format aiming to be simple and without useless clutter.
+{% tab title="Embed" %}
+An embedded format aiming to be simple and without useless clutter.
 
-    ![Example Image](../assets/embed.png)
+![Example Image](../assets/embed.png)
+{% endtab %}
 
-=== "Emoji"
-    A format based on an emoji style of logging.
+{% tab title="Emoji" %}
+A format based on an emoji style of logging.
 
-    ![Example Image](../assets/emoji.png)
+![Example Image](../assets/emoji.png)
+{% endtab %}
+{% endtabs %}
 
 To configure the format, use `.config logging` and follow the prompts.
 
@@ -65,8 +71,9 @@ To set up a level, use `.config permissions add <member/role>` to add and `.conf
 
 Admins are the highest in power with Lightning. They can configure anything on the bot freely and use any command.
 
-!!! danger
-    You should only give people you trust the most the Admin level.
+{% hint style="danger" %}
+You should only give people you trust the most the Admin level.
+{% endhint %}
 
 #### Mod
 
@@ -84,8 +91,9 @@ To disable a command from being run in your server, run `.config permissions blo
 
 To undo this, run `.config permissions unblockcommand <command>`.
 
-!!! warning
-    No one, not even the server owner, can bypass this restriction unless they add a command override.
+{% hint style="warning" %}
+No one, not even the server owner, can bypass this restriction unless they add a command override.
+{% endhint %}
 
 ### Explicit Command Allows
 
@@ -97,5 +105,6 @@ If you want change the level for a command, run `.config permissions commandover
 
 To undo all overrides for a command, run `.config permissions commandoverrides removeall <command>`
 
-!!! warning
-    The bot owner/devs are not responsible for any damage that may happen. Use it wisely.
+{% hint style="warning" %}
+The bot owner/devs are not responsible for any damage that may happen. Use it wisely.
+{% endhint %}
