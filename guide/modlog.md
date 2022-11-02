@@ -2,11 +2,11 @@
 
 To start setting up the modlog, use the `modlog` command. Use the reference below if you are confused about anything.
 
-<% hint style="info" %>
+{% hint style="info" %}
 Lightning's mod logging supports multiple modlog channels with any number of events.
 
 Now you can customize your server's mod logs any way you want! 🎉
-<% endhint %>
+{% endhint %}
 
 ## Events
 
