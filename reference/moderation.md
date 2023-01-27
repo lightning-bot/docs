@@ -56,8 +56,9 @@ These commands will do the inverse of their action (unban/unmute) after a certai
 Infractions are created when a moderation action has happened.
 If your server has a modlog channel setup, those IDs will be displayed in the log message.
 
-!!! tip
-    You can also find the server's infraction list by running `.inf list`.
+{% hint style="info" %}
+You can also find the server's infraction list by running `.inf list`.
+{% endhint %}
 
 ### Claiming an infraction
 
@@ -81,9 +82,7 @@ This will transfer the old user's infractions to their new account.
 
 `.inf list` is the base command and will display all infractions in the server.
 
-If you want specific infractions that were done to a user, use `.inf list member <member>`.
-
-If you want specific infractions that were done by a moderator, use `.inf list takenby <member>`.
+If you want specific infractions that were done to a user, use `.inf list [member]`.
 
 
 {% hint style="info" %}
@@ -91,7 +90,6 @@ If you want to view a specific infraction, use `.inf view <id>`
 {% endhint %}
 
 ```
-.inf list takenby @Moderator4#6781
-.inf list member @NewUser#5005
+.inf list @NewUser#5005
 ```
 
