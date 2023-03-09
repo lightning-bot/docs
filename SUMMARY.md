@@ -1,5 +1,7 @@
 ‌# Summary​
 
+* [Introduction](README.md)
+
 ## Guide
 
 * [Basic Configuration](guide/bot-configuration.md)
