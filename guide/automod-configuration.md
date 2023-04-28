@@ -1,12 +1,16 @@
-# Automod Configuration
+# AutoMod Configuration
 
-Lightning's AutoMod can be setup via message commands!
+Lightning's AutoMod can be setup via message or slash commands!
 
 ---
 
 Run `.help automod` to start!
 
-## Automod Types Reference
+## Advanced AutoMod
+
+These rules are considered advanced because you can set the interval for them.
+
+Advanced AutoMod rules can be located below. 
 
 | Name | Description |
 | ---- | ----------- |
@@ -16,11 +20,24 @@ Run `.help automod` to start!
 | invite-spam | Automod type for controlling how many invites can be sent during x seconds |
 | message-content-spam | Automod type for controlling how many messages containing the same content can be sent during x seconds |
 
+
+## Basic AutoMod
+
+Basic AutoMod rules are rules that only do one action and cannot be customized!
+
+| Name | Description |
+| ---- | ----------- |
+| auto-dehoist | Dehoists server members if they have any characters in their name that are used for hoisting |
+| auto-normalize | Normalizes a member's display name |
+
+
 ## Setting up an AutoMod rule
 
 ![Example usage](../assets/rules_add.gif)
 
 - `automod rules add`
+
+If you're wanting to set up a Basic AutoMod rule, you'll need to use `automod rules addbasic` instead!
 
 ## Removing an AutoMod rule
 
