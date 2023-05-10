@@ -12,3 +12,8 @@
 
 ## Reference
 * [Moderation](reference/moderation.md)
+
+
+## Policies
+* [Terms of Service](tos.md)
+* [Privacy Policy](privacy-policy.md)
