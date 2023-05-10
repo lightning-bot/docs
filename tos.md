@@ -6,6 +6,6 @@ These terms apply to **Lightning#2270**, **Thunder#2036**.
 - You shall not abuse, reverse engineer, or otherwise harm this service.
 - In the event that the bot breaks, goes offline, is deleted, or is permanently stopped, we are not responsible for any issue this may cause for you.
 - If you notice a security issue or a bug, you will notify the bot developer as soon as possible by Discord (Join the support server and DM "Frost#6943") or email.
-- You are required to follow [Discord's Terms of Service](https://discord.com/terms).
+- You are required to follow [Discord's Terms of Service](https://discord.com/terms). All data is processed according to the [Discord Privacy Policy](https://discord.com/privacy)
 
 This document is subject to be changed in the future.
