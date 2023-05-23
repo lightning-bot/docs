@@ -12,8 +12,6 @@ This guide uses "." as a prefix. Replace this with a prefix you setup Lightning 
 
 ### Warns, Kicks, Bans, Unbans
 
-Straightforward commands
-
 ```
 .kick @NewUser#5005 be nice
 .warn @NewUser#5005 rule #4
@@ -69,10 +67,6 @@ You can also find the server's infraction list by running `.inf list`.
 `.inf edit 5 User was spamming stickers and emojis`
 
 ### Transferring infractions to a user's new account
-
-Solves use cases where a member has made a new account and joined the server with their new account.
-
-This will transfer the old user's infractions to their new account.
 
 ```
 .inf transfer @OldUser#0010 @NewUser#5005
