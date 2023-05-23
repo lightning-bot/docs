@@ -14,11 +14,11 @@ Advanced AutoMod rules can be located below.
 
 | Name | Description |
 | ---- | ----------- |
-| message-spam | Automod type for controlling how many messages can a user send in the server during x seconds |
-| mass-mentions | Automod type for controlling how many mentions can be sent in a single message |
-| url-spam | Automod type for controlling how many links can be sent during x seconds |
-| invite-spam | Automod type for controlling how many invites can be sent during x seconds |
-| message-content-spam | Automod type for controlling how many messages containing the same content can be sent during x seconds |
+| message-spam | Controls how many messages a user can send in the server during <x> seconds |
+| mass-mentions | Controls how many mentions can be sent in <x> seconds |
+| url-spam | Controls how many links can be sent in <x> seconds |
+| invite-spam | Controls how many invites can be sent in <x> seconds |
+| message-content-spam | Controls how many messages containing the same content can be sent during <x> seconds |
 
 
 ## Basic AutoMod
