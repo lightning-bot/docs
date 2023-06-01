@@ -21,13 +21,13 @@ Once you get a confirmation, the message will show up in your configured reports
 
 Included below is an example of how to report messages.
 
-![example](https://cdn.discordapp.com/attachments/1097912087583404155/1097919163764314284/Screen_Recording_2023-04-18_at_11.18.21_AM.mov)
+![Reporting a message](https://cdn.discordapp.com/attachments/527965708793937960/1113811023233830922/reports.gif)
 
 ### Message Report Dashboard
 
 When a member reports a message, a new message will appear in your configured reports channel. This will allow your moderators to decide what to do with the message.
 
-![Report Dash](../assets/report_dash.png)
+![Report Dashboard](../assets/report_dash.png)
 
 Here's a quick breakdown of all the buttons you will see.
 
