@@ -17,7 +17,7 @@ Advanced AutoMod rules can be located below.
 | message-spam | Controls how many messages a user can send in the server during <x> seconds |
 | mass-mentions | Controls how many mentions can be sent in <x> seconds |
 | url-spam | Controls how many links can be sent in <x> seconds |
-| invite-spam | Controls how many invites can be sent in <x> seconds |
+| invite-spam | Controls how many Discord invites can be sent in <x> seconds |
 | message-content-spam | Controls how many messages containing the same content can be sent during <x> seconds |
 
 
