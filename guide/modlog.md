@@ -1,12 +1,8 @@
 # Mod Log
 
+Lightning's mod logging supports multiple modlog channels with any number of events. This allows to customize your server's mod logs any way you want!
+
 To start setting up the modlog, use the `modlog` command. Use the reference below if you are confused about anything.
-
-{% hint style="info" %}
-Lightning's mod logging supports multiple modlog channels with any number of events.
-
-Now you can customize your server's mod logs any way you want! 🎉
-{% endhint %}
 
 ## Events
 
@@ -25,6 +21,7 @@ Lightning's modlog currently supports the following events:
 | Member Role Add | Logs when roles are added to a member | ✅ |
 | Member Role Remove | Logs when roles are removed from a member | ✅ |
 | Member Nick Change | Logs when a nickname is added/changed/removed from a member | ✅ |
+| Infraction Update | Logs when either the reason or moderator is updated for an infraction | Not Applicable |
 
 ## Logging Formats
 
