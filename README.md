@@ -22,7 +22,7 @@ At this time, there are no premium or vote locked features on the bot.
 If you enjoy the bot, consider donating on [Ko-Fi](https://ko-fi.com/lightsage) so I can keep the bot free!
 
 #### Open Source!
-Lightning is fully open source and you can see all the internals at <https://gitlab.com/lightning-bot/Lightning>.
+Lightning is fully open source and you can see all the internals at <https://github.com/lightning-bot/Lightning>.
 
 ### Convinced yet?
 You can add this bot to your server by visting the following url <https://discord.com/oauth2/authorize?client_id=532220480577470464&scope=bot+applications.commands&permissions=1118705151190>.
