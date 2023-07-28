@@ -4,7 +4,7 @@ These are general instructions to self host the bot.
 
 **Clone the repository with git**
 
-`git clone https://gitlab.com/lightning-bot/Lightning.git`
+`git clone https://github.com/lightning-bot/Lightning.git`
 
 ---
 
