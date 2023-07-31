@@ -20,6 +20,8 @@ These are general instructions to self host the bot.
 - **Run the bot**
     - `docker-compose up`
 
+If you want application commands, make sure to run `<prefix>jsk sync` in your Discord server!
+
 
 ### Some helpful commands
 
