@@ -87,3 +87,19 @@ If you want to view a specific infraction, use `.inf view <id>`
 .inf list @NewUser#5005
 ```
 
+#### Listing specific infraction types
+If you want to view specific infraction types, use `.inf list [action]`
+
+You can also filter this by a member too! `.inf list [member] [action]`
+
+Valid actions are:
+- Warn
+- Kick
+- Mute
+- Ban
+- Timeban
+- Unban
+- Unmute
+- Timemute
+- Timeout
+- Untimeout
