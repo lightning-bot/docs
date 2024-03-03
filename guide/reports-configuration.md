@@ -21,7 +21,7 @@ Once you get a confirmation, the message will show up in your configured reports
 
 Included below is an example of how to report messages.
 
-![Reporting a message](https://cdn.discordapp.com/attachments/527965708793937960/1113811023233830922/reports.gif)
+![Reporting a message](../assets/report_message.gif)
 
 ### Message Report Dashboard
 
