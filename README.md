@@ -4,11 +4,7 @@ A Discord bot offering powerful moderation for your server!
 
 ### Why choose this bot?
 
-This bot includes some of the most common features as well as some noteworthy features in the next section.
-
-- `warn`, `kick`, `ban`, `timeban`, `mute`, `timemute` moderation commands
-- Custom prefixes
-- Reminders
+I've discovered that many popular Discord bots lack certain moderation features, which require another bot or have confusing configuration, such as a .yml file or complicated command syntax. Lightning eliminates these barriers and offers your server the best of both worlds. It's designed to be effortlessly configurable while delivering advanced features at the same time.
 
 #### Noteworthy features you don't normally find in popular Discord bots
 - Multiple mod log formats
