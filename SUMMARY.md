@@ -8,6 +8,7 @@
 * [ModLog Configuration](guide/modlog.md)
 * [AutoMod Configuration](guide/automod-configuration.md)
 * [Message Report Configuration](guide/reports-configuration.md)
+* [Gatekeeper Configuration](guide/gatekeeper-configuration.md)
 
 ## Reference
 * [Moderation](reference/moderation.md)
