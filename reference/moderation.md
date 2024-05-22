@@ -4,7 +4,7 @@ A general quick start guide to using Lightning for moderation.
 
 
 {% hint style="info" %}
-This guide uses "." as a prefix. Replace this with a prefix you setup Lightning with.
+This guide uses `.` as a prefix. Replace this with a prefix you setup Lightning with.
 {% endhint %}
 
 
