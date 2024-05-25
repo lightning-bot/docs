@@ -1,4 +1,4 @@
-‌# Summary​
+# Table of contents
 
 * [Introduction](README.md)
 
@@ -11,10 +11,11 @@
 * [Gatekeeper Configuration](guide/gatekeeper-configuration.md)
 
 ## Reference
+
 * [Moderation](reference/moderation.md)
 * [Command List](reference/command-list.md)
 
-
 ## Policies
+
 * [Terms of Service](tos.md)
 * [Privacy Policy](privacy-policy.md)
