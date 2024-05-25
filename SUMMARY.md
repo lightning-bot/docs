@@ -12,6 +12,7 @@
 
 ## Reference
 * [Moderation](reference/moderation.md)
+* [Command List](reference/command-list.md)
 
 
 ## Policies
