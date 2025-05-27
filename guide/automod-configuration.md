@@ -14,11 +14,11 @@ Advanced AutoMod rules can be located below.
 
 | Name | Description |
 | ---- | ----------- |
-| message-spam | Controls how many messages a user can send in the server during <x> seconds |
-| mass-mentions | Controls how many mentions can be sent in <x> seconds |
-| url-spam | Controls how many links can be sent in <x> seconds |
-| invite-spam | Controls how many Discord invites can be sent in <x> seconds |
-| message-content-spam | Controls how many messages containing the same content can be sent during <x> seconds |
+| message-spam | Controls how many messages a user can send in the server during &#60;x&#62; seconds |
+| mass-mentions | Controls how many mentions can be sent in &#60;x&#62; seconds |
+| url-spam | Controls how many links can be sent in &#60;x&#62; seconds |
+| invite-spam | Controls how many Discord invites can be sent in &#60;x&#62; seconds |
+| message-content-spam | Controls how many messages containing the same content can be sent during &#60;x&#62; seconds |
 
 
 ## Basic AutoMod
