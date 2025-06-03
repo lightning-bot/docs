@@ -1,33 +1,41 @@
 # AutoMod Configuration
 
-Lightning's AutoMod can be setup via message or slash commands!
+Lightning's AutoMod system automatically detects and handles unwanted behavior like spam, hoisting, and excessive mentions to help keep your server clean and safe.
+
+You can configure it via message or slash commands!
 
 ---
 
 Run `.help automod` to start!
 
-## Advanced AutoMod
+## AutoMod Rules
 
-These rules are considered advanced because you can set the interval for them.
-
-Advanced AutoMod rules can be located below. 
-
-| Name | Description |
-| ---- | ----------- |
-| message-spam | Controls how many messages a user can send in the server during &#60;x&#62; seconds |
-| mass-mentions | Controls how many mentions can be sent in &#60;x&#62; seconds |
-| url-spam | Controls how many links can be sent in &#60;x&#62; seconds |
-| invite-spam | Controls how many Discord invites can be sent in &#60;x&#62; seconds |
-| message-content-spam | Controls how many messages containing the same content can be sent during &#60;x&#62; seconds |
+Lightning defines two different rules:
+- **Advanced Rules** are fully customizable rules with time intervals and thresholds.
+- **Basic Rules** are simple, predefined behavioral rules with no customization.
 
 
-## Basic AutoMod
-
-Basic AutoMod rules are rules that only do one action and cannot be customized!
+## Advanced AutoMod Rules
+These rules are fully customizable with time intervals and thresholds, allowing you to adapt Lightning's AutoMod to your server’s specific moderation needs.
 
 | Name | Description |
 | ---- | ----------- |
-| auto-dehoist | Dehoists server members if they have any characters in their name that are used for hoisting |
+| message-spam | Limits how many messages a user can send in the server during &#60;x&#62; seconds |
+| mass-mentions | Limits how many mentions can be sent in &#60;x&#62; seconds |
+| url-spam | Limits how many links can be sent in &#60;x&#62; seconds |
+| invite-spam | Limits how many Discord invites can be sent in &#60;x&#62; seconds |
+| message-content-spam | Limits how many duplicate messages can be sent during &#60;x&#62; seconds |
+
+> When these rules are triggered, actions such as message deletion, timeouts, or warnings may be applied (depending on your configuration).
+
+
+## Basic AutoMod Rules
+
+Basic AutoMod Rules are pre-configured and act immediately when triggered — no extra setup required.
+
+| Name | Description |
+| ---- | ----------- |
+| auto-dehoist | Automatically renames members with leading hoist characters (like, `!`, `#`) |
 | auto-normalize | Normalizes a member's display name |
 
 
