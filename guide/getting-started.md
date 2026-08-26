@@ -1,10 +1,21 @@
 # Getting Started
 
-For additional help, join the [support server](https://short.lightsage.dev/discord)!
+Welcome to Lightning. This page helps you get from "just invited the bot" to "ready for moderation" in a few minutes.
+
+Need a hand? Join the [support server](https://short.lightsage.dev/discord).
+
+## 5-minute setup checklist
+
+1. Pick how you want to run commands (mention only, or mention + custom prefix).
+2. Set a mute role (optional, but recommended).
+3. Test one moderation command in a private channel.
+4. Continue with AutoMod, ModLog, and Reports in the other guide pages.
 
 ## Prefix
 
-By default, the bot's prefix is it's mention (@Lightning) and cannot be removed. However, you can add custom prefixes that the bot will respond to.
+By default, Lightning always responds to its mention (`@Lightning`). This mention prefix cannot be removed.
+
+You can also add one or more custom prefixes.
 
 Run `@Lightning config prefix` & click on the Add Prefix button to add a new custom prefix.
 
@@ -14,7 +25,20 @@ Run `@Lightning config prefix` & click on the Add Prefix button to add a new cus
 If you do not set a mute role, Lightning will use timeouts for timed mutes. If the duration for a mute is over 28 days, you will be forced to set a mute role!
 {% endhint %}
 
-You can assign an existing Muted role for Lightning to use by using `@Lightning config muterole <role>`.
+If your server already has a Muted role, set it with:
 
-If you don't have a Muted role, you can create a new role in your server's settings, then use `@Lightning config muterole <role>`, then run `@Lightning config muterole update` to set the proper permissions in every channel. 
+`@Lightning config muterole <role>`
+
+If you do not have one yet:
+
+1. Create a new role in Server Settings (for example: `Muted`).
+2. Run `@Lightning config muterole <role>`.
+3. Run `@Lightning config muterole update` to apply channel permission overrides.
+
+## What to do next
+
+- Configure [AutoMod](automod-configuration.md) to reduce spam.
+- Configure [ModLog](modlog.md) so staff actions are visible and searchable.
+- Configure [Message Reports](reports-configuration.md) so members can report bad messages quickly.
+- Configure [Gatekeeper](gatekeeper-configuration.md) if your server gets frequent bot joins.
 

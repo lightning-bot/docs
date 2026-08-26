@@ -1,21 +1,39 @@
 # Gatekeeper (Verification System)
 
-Lightning includes a verification system for your members under the name of "Gatekeeper". Gatekeeper is designed to be the barrier between your actual server members and scam bots.
+Gatekeeper is Lightning's member verification system. It helps block spam and scam bot joins before they can talk in your server.
 
 ## Set Up
 
-In order to use Gatekeeper in your server, you will need to first set it up. Run @Lightning automod gatekeeper and follow through each button to set up your gatekeeper.
+To enable Gatekeeper, run `@Lightning automod gatekeeper` and complete the setup buttons in the UI.
+
+During setup, you will choose:
+
+1. A verification role
+2. A verification channel
+3. A verification type
+4. The verification message
 
 {% embed url="https://www.youtube.com/watch?v=-wFsG1d_hI8" %}
 
 
+## Verification types
+
+- **Basic**: Member clicks **Verify Me**.
+- **Honeypot**: Member must click the safe option; wrong choices can trigger a kick attempt.
+
 ## FAQs
 
 #### How does this actually work?
-When a new member (we'll refer to him as John) enters your server via a Discord invite link, Lightning will immediately apply a verification role to John. John will now be forced to enter the verification channel and click the button in the message to verify himself. Once he clicked the Verify Me button, Lightning will remove the verification role from John. John will now have access to the server.
+When a new member joins, Lightning immediately applies your verification role. That role keeps them restricted until they go to your verification channel and complete verification. After they verify, Lightning removes the verification role and they can access the rest of the server.
 
 #### What happens if I delete the designated verification role?
-Every member who is pending verification will be able to chat in your server. Gatekeeper will also disable itself and you'll be forced to set up another verification role.
+Pending members may no longer be restricted properly, and Gatekeeper will disable itself. Re-run `@Lightning automod gatekeeper` to configure a new verification role.
 
 #### What happens if I delete the verification channel?
-Every member who is pending verification will no longer be able to verify at all. You can set up another channel and resend the verification message by reconfiguring the gatekeeper via `automod gatekeeper`.
+Pending members will not be able to verify. Create/configure a new channel, then re-run `@Lightning automod gatekeeper` to resend the verification message.
+
+## Quick troubleshooting
+
+- Members are stuck verifying: confirm the verification channel still exists and members can see it.
+- Verification not removing role: check Lightning has Manage Roles and that the verification role is below Lightning's role.
+- Gatekeeper disabled itself: verify that both the verification role and channel still exist.

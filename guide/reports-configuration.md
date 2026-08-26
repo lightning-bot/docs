@@ -1,22 +1,22 @@
 # Message Reports
 
-Lightning includes a powerful, easy-to-use message reporting system.
+Lightning includes a built-in system for members to report suspicious or rule-breaking messages.
 
 ## Set Up
 
-Type `@Lightning reportsetup`. 
+Run `@Lightning reportsetup`.
 
-Click or tap the Set report channel button. Then, select the channel you want reports sent to. 
+Click **Set report channel**, then select where reports should be sent.
 
-**This channel should be accessible only to your server's moderators and admins.**
+Use a private channel that only moderators/admins can access.
 
-Once you finished, your server's members will now be able to report suspicious or rule breaking messages.
+Once set, members can start reporting messages immediately.
 
 ## How to report messages
 
-Right-click on a message, hover over Apps, and click Report Message.
+Members can report messages by right-clicking a message, opening **Apps**, and clicking **Report Message**.
 
-Once you get a confirmation, the message will show up in your configured reports channel.
+After confirmation, the report appears in your configured reports channel.
 
 
 Included below is an example of how to report messages.
@@ -25,20 +25,26 @@ Included below is an example of how to report messages.
 
 ### Message Report Dashboard
 
-When a member reports a message, a new message will appear in your configured reports channel. This will allow your moderators to decide what to do with the message.
+Each report creates a dashboard message for staff, so moderators can review and act quickly.
 
 ![Report Dashboard](../assets/report_dash.png)
 
 Here's a quick breakdown of all the buttons you will see.
 
 #### Action
-This button will allow you to set some sort of punishment for the reported message author.
+Apply a moderation action to the message author.
 
 #### View Reporters
-This button will allow you see who reported the message and their reasoning for reporting it.
+See who reported the message and their reasons.
 
 #### Dismiss
-This button will allow you to dismiss the report. You can re-open it again if you accidentally dismissed it.
+Close the report if no action is needed. You can reopen it later if needed.
 
 #### View Reported Message
-This button will show you where exactly the message was and its full contents.
+Jump to the original message location and view its full content.
+
+## Tips
+
+- Encourage members to include a clear reason when reporting.
+- Keep report channels staff-only to avoid leaking reporter identity.
+- Review older dismissed reports occasionally for repeat patterns.

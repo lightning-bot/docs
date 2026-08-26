@@ -1,12 +1,19 @@
 # Mod Log
 
-Lightning's mod logging supports multiple modlog channels with any number of events. This allows to customize your server's mod logs any way you want!
+Lightning can log moderation activity to one or more channels. You can choose exactly which events go to which channel.
 
-To start setting up the modlog, use the `modlog` command. Use the reference below if you are confused about anything.
+To get started, run the `modlog` command and follow the prompts.
+
+## Quick setup
+
+1. Run `modlog`.
+2. Pick a log channel (staff-only recommended).
+3. Select the events you want logged.
+4. Pick a log format.
 
 ## Events
 
-Lightning's modlog currently supports the following events:
+Lightning currently supports these events:
 
 | Event | Description | Audit Log Integration |
 | :----- | :---------- | :------------------- |
@@ -25,32 +32,38 @@ Lightning's modlog currently supports the following events:
 
 ## Logging Formats
 
-Lightning includes 4 formats in which you can receive logs.
+Lightning includes 4 log formats.
 
 {% tabs %}
 {% tab title="Minimalistic with Timestamp (default)" %}
-A simple, minimal format.
+A simple format with a timestamp.
 
 ![Example Image](../assets/minimal.png)
 {% endtab %}
 
 {% tab title="Minimalistic without Timestamp" %}
-Same as minimalistic except it doesn't include a timestamp.
+Same minimal style, without timestamp.
 
 ![Example Image](../assets/minimal2.png)
 {% endtab %}
 
 {% tab title="Embed" %}
-An embedded format aiming to be simple and without useless clutter.
+A clean embed format.
 
 ![Example Image](../assets/embed.png)
 {% endtab %}
 
 {% tab title="Emoji" %}
-A format based on an emoji style of logging.
+An emoji-based style.
 
 ![Example Image](../assets/emoji.png)
 {% endtab %}
 {% endtabs %}
 
-To configure the format, use `.modlog` and follow the prompts.
+To change format later, run `.modlog` again and update your settings.
+
+## Tips
+
+- Use a private staff channel for moderation events.
+- If logs seem incomplete, verify that the event is enabled for the channel.
+- For events with audit log integration, make sure Lightning has the required server permissions.
