@@ -7,7 +7,7 @@ You can use both slash commands (recommended) and prefix commands:
 - Prefix: `.automod ...`
 
 {% hint style="info" %}
-You need Manager Server permission access to configure AutoMod.
+You need Manage Server permission access to configure AutoMod.
 {% endhint %}
 
 ## Quick start (2 minutes)
