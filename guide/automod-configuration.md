@@ -1,84 +1,192 @@
 # AutoMod Configuration
 
-Lightning's AutoMod system automatically detects and handles unwanted behavior like spam, hoisting, and excessive mentions to help keep your server clean and safe.
+AutoMod helps you reduce spam and keep your server readable by automatically taking moderation actions when limits are hit.
 
-You can configure it via message or slash commands!
+You can use both slash commands (recommended) and prefix commands:
+- Slash: `/automod ...`
+- Prefix: `.automod ...`
+
+{% hint style="info" %}
+You need Manager Server permission access to configure AutoMod.
+{% endhint %}
+
+## Quick start (2 minutes)
+
+1. Open the interactive setup:
+
+```
+/automod rules interactive
+```
+
+2. Create one or two core rules:
+- Message spam: `5/10s` with `warn` or `delete`
+- Invite spam: `1/30s` with `delete` or `warn`
+
+3. Add channels/roles you want ignored:
+
+```
+/automod ignore #staff @moderators
+```
+
+4. Check your final setup:
+
+```
+/automod view
+```
 
 ---
 
-Run `.help automod` to start!
+## How AutoMod rules work
 
-## AutoMod Rules
+Each advanced rule uses:
+- A **limit** (`count`)
+- A **time window** (`seconds`)
+- A **punishment** (`delete`, `warn`, `mute`, `kick`, or `ban`)
 
-Lightning defines two different rules:
-- **Advanced Rules** are fully customizable rules with time intervals and thresholds.
-- **Basic Rules** are simple, predefined behavioral rules with no customization.
+Example:
 
+```
+/automod rules add message-spam 5/10s warn
+```
 
-## Advanced AutoMod Rules
-These rules are fully customizable with time intervals and thresholds, allowing you to adapt Lightning's AutoMod to your server’s specific moderation needs.
+This means: on the 5th message in 10 seconds, AutoMod triggers.
 
-| Name | Description |
-| ---- | ----------- |
-| message-spam | Limits how many messages a user can send in the server during &#60;x&#62; seconds |
-| mass-mentions | Limits how many mentions can be sent in &#60;x&#62; seconds |
-| url-spam | Limits how many links can be sent in &#60;x&#62; seconds |
-| invite-spam | Limits how many Discord invites can be sent in &#60;x&#62; seconds |
-| message-content-spam | Limits how many duplicate messages can be sent during &#60;x&#62; seconds |
+You can write intervals in two formats:
+- `5/10s`
+- `5 10`
 
-> When these rules are triggered, actions such as message deletion, timeouts, or warnings may be applied (depending on your configuration).
+If you use `mute` or `ban`, you can add a duration:
 
+```
+/automod rules add message-spam 5/10s mute 30m
+```
 
-## Basic AutoMod Rules
+---
 
-Basic AutoMod Rules are pre-configured and act immediately when triggered — no extra setup required.
+## Advanced rules
 
-| Name | Description |
-| ---- | ----------- |
-| auto-dehoist | Automatically renames members with leading hoist characters (like, `!`, `#`) |
-| auto-normalize | Normalizes a member's display name |
+| Rule | What it checks |
+| --- | --- |
+| `message-spam` | How many total messages a member sends in the time window. |
+| `mass-mentions` | How many user/role mentions are in a message burst. |
+| `url-spam` | Messages containing `http://` or `https://` links. |
+| `invite-spam` | Messages containing Discord invite links (`discord.gg` / `discord.com/invite`). |
+| `message-content-spam` | Repeated messages (tracked by member + message length). |
 
-
-## Setting up an AutoMod rule
-
-![Example usage](../assets/rules_add.gif)
-
-- `automod rules add`
-
-If you're wanting to set up a Basic AutoMod rule, you'll need to use `automod rules addbasic` instead!
-
-## Removing an AutoMod rule
-
-![Example usage](../assets/rules_remove.gif)
-
-- `automod rules remove`
-
-## AutoMod Ignores
-
-### Setting up AutoMod ignores
-
-- `automod ignore`
-
-You can add roles, members, and channels to the ignored list.
-
-{% hint style="info" %}
-If you add a channel to the ignored list, AutoMod will ignore all messages in that channel.
+{% hint style="warning" %}
+`message-content-spam` is currently tracked by message length, not exact text match.
 {% endhint %}
 
-### Removing an ignore
+Common commands:
 
-- `automod unignore`
+```
+/automod rules add <rule> <count>/<seconds>s <delete|warn|mute|kick|ban> [duration]
+/automod rules remove <rule>
+```
+
+---
+
+## Basic rules (name cleanup)
+
+Basic rules do not use a rate limit. They are simple on/off protections.
+
+| Rule | What it does |
+| --- | --- |
+| `auto-dehoist` | Renames display names that start with common hoist characters (like `!`, `#`, `$`). |
+| `auto-normalize` | Normalizes display names to a cleaner ASCII-like form. |
+
+Commands:
+
+```
+/automod rules addbasic <auto-dehoist|auto-normalize>
+/automod rules remove <auto-dehoist|auto-normalize>
+```
+
+---
+
+## Ignores (exemptions you control)
+
+You can exclude roles, members, channels, and threads from AutoMod.
+
+Commands:
+
+```
+/automod ignore <entities...>
+/automod unignore <entities...>
+/automod ignored
+```
+
+Examples:
+
+```
+/automod ignore @moderators #staff-chat
+/automod unignore #staff-chat
+```
 
 {% hint style="info" %}
-If you don't know what is currently ignored, use `automod ignored`
+If you ignore a channel or thread, AutoMod ignores messages sent there.
 {% endhint %}
 
-### Who is ignored by AutoMod?
+AutoMod also skips some messages automatically, including DMs, bot messages, and members who are trusted by your server's Lightning permission config.
 
-The following are checked in the following order to determine if you are ignored from AutoMod:
+---
 
-- You have a higher role than the bot does.
-- You are exempt from AutoMod by permission level configuration
-    - Either you're specifically added to a permission level or have a role that is Trusted or higher
-- You are exempt from AutoMod by AutoMod Default Ignores
+## Warn threshold (separate from spam rules)
+
+Warn threshold is a server-wide escalation rule:
+- If a member reaches X warnings, Lightning automatically `kick`s or `ban`s them.
+- This is based on warning infractions, not just AutoMod warnings.
+
+Commands:
+
+```
+/automod warnthreshold set <1-10> <kick|ban>
+/automod warnthreshold remove
+/automod warnthreshold migrate
+```
+
+---
+
+## Gatekeeper (join verification)
+
+Gatekeeper restricts new members until they verify.
+
+Start setup:
+
+```
+/automod gatekeeper
+```
+
+The setup UI lets you:
+- Choose/create a verification role
+- Choose a verification channel
+- Pick a verification type
+- Send (or update) the verification message
+- Enable/disable Gatekeeper
+
+Verification types:
+- **Basic**: Member clicks **Verify Me**.
+- **Honeypot**: Member must click the one safe button; wrong choice attempts a kick.
+
+{% hint style="info" %}
+Lightning needs Manage Roles and Manage Channels to run Gatekeeper setup and keep it working.
+{% endhint %}
+
+---
+
+## Troubleshooting
+
+- **"This rule has already been set up"**: remove it first, then add it again.
+- **AutoMod not triggering**: check `/automod view`, then confirm the user/channel/role is not ignored.
+- **Muted users are not being muted**: ensure your mute role/config is valid if timeout cannot be used.
+- **Not sure what is active?** use `/automod view`.
+
+## Recommended starter profile
+
+If you are new, start with:
+- `message-spam` -> `5/10s` -> `warn`
+- `invite-spam` -> `1/30s` -> `delete`
+- `mass-mentions` -> `6/10s` -> `warn`
+
+Then adjust once you see real traffic patterns in your server.
 
