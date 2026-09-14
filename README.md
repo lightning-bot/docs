@@ -55,6 +55,8 @@ Dark mode uses muted amber-orange (`#e89a62`) for primary actions and accents, w
 
 ## Docker Compose
 
+For production on the shared VPS, use the [GitHub Actions deployment guide](docs/DEPLOYMENT.md). It reuses the portfolio's deployment interface for `https://lightningbot.app`: builds on `master`, GitHub deployment statuses, SSH upload, and atomic releases under `/var/www/lightning-docs/current`.
+
 Docker builds the Vue site in a Node 22 stage, runs the content tests, and copies only the finished static files into Nginx. Node and the source files are not needed at runtime.
 
 ```sh

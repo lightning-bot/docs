@@ -9,3 +9,6 @@ public/assets/
 
 .env
 .env.*
+
+__pycache__/
+*.pyc

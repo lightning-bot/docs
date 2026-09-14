@@ -1,0 +1,79 @@
+name: Deploy website to VPS
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: production-vps
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment:
+      name: production
+      # This workflow creates and updates the deployment through the REST API.
+      deployment: false
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Create GitHub deployment
+        id: deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPLOYMENT_URL: ${{ vars.DEPLOYMENT_URL || 'https://lightningbot.app' }}
+        run: python3 scripts/github-deployment.py create
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Install and build
+        run: |
+          npm ci
+          npm test
+          python3 -m unittest discover -s scripts/tests -v
+          npm run build
+      - name: Report deployment in progress
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPLOYMENT_ID: ${{ steps.deployment.outputs.deployment_id }}
+          DEPLOYMENT_URL: ${{ vars.DEPLOYMENT_URL || 'https://lightningbot.app' }}
+        run: python3 scripts/github-deployment.py in_progress
+      - name: Upload and activate release
+        env:
+          VPS_HOST: ${{ vars.VPS_HOST }}
+          VPS_USER: ${{ vars.VPS_USER }}
+          VPS_PORT: ${{ vars.VPS_PORT || '22' }}
+          VPS_PATH: ${{ vars.VPS_PATH || '/var/www/lightning-docs' }}
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+          RELEASE_ID: ${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+        run: bash scripts/deploy-vps.sh
+      - name: Refresh Cloudflare cache
+        id: cache
+        if: ${{ vars.CLOUDFLARE_PURGE_ENABLED == 'true' }}
+        continue-on-error: true
+        timeout-minutes: 2
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_HOSTNAME: ${{ vars.CLOUDFLARE_HOSTNAME || 'lightningbot.app' }}
+          CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID }}
+        run: python3 scripts/purge-cloudflare.py
+      - name: Report deployment result
+        if: ${{ always() && steps.deployment.outputs.deployment_id != '' }}
+        timeout-minutes: 2
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPLOYMENT_ID: ${{ steps.deployment.outputs.deployment_id }}
+          DEPLOYMENT_URL: ${{ vars.DEPLOYMENT_URL || 'https://lightningbot.app' }}
+          DEPLOYMENT_RESULT: ${{ job.status }}
+          CACHE_RESULT: ${{ steps.cache.outcome }}
+        run: python3 scripts/github-deployment.py finish
