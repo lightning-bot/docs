@@ -11,7 +11,7 @@ This uses the same [deployment interface as the portfolio](https://github.com/ce
 | Deployment base | `/var/www/lightning-docs` |
 | Nginx root | `/var/www/lightning-docs/current` |
 
-The runner uses Node 22, runs the website and deployment-helper tests, and builds the prerendered Vite site. Only `dist/` is uploaded. The Linux VPS needs Bash, GNU coreutils, OpenSSH, rsync, and native Nginx. Routine deployment needs no sudo, Docker, Node, or Nginx reload. Docker Compose remains available for local use.
+The runner uses Node 22, runs the website and deployment-helper tests, and builds the prerendered Vite site. Before upload, the deployment script reads `navigation.toml` with the installed build dependencies and checks every configured page in `dist/`. It checks the same files on the VPS before activating the release, so endpoint changes need no script edits. Only `dist/` is uploaded. The Linux VPS needs Bash, GNU coreutils, OpenSSH, rsync, and native Nginx. Routine deployment needs no sudo, Docker, Node, or Nginx reload. Docker Compose remains available for local use.
 
 ## 1. Provision the deployment account
 

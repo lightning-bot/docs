@@ -17,9 +17,24 @@ VPS_PATH=${VPS_PATH:-/var/www/lightning-docs}
 [[ $VPS_PORT =~ ^[0-9]{1,5}$ ]] && (( 10#$VPS_PORT >= 1 && 10#$VPS_PORT <= 65535 )) || fail 'Invalid VPS_PORT.'
 [[ $VPS_PATH =~ ^/([a-zA-Z0-9_-]+/)*[a-zA-Z0-9_-]+$ ]] || fail 'VPS_PATH must be an absolute path with simple directory names.'
 [[ $RELEASE_ID =~ ^[a-f0-9]{40}-[0-9]+-[0-9]+$ ]] || fail 'Invalid RELEASE_ID.'
-for file in index.html 404.html docs/index.html guide/modlog/index.html; do
+required_files=(index.html 404.html docs/index.html)
+for file in "${required_files[@]}"; do
   [[ -s dist/$file ]] || fail "Missing or empty dist/$file"
 done
+# Read the same validated, named-table navigation used by the build.
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+route_files=$(node --input-type=module - "$script_dir/content/navigation.mjs" "$PWD" <<'NODE'
+import {pathToFileURL} from 'node:url'
+const {loadNavigation} = await import(pathToFileURL(process.argv[2]).href)
+for (const page of loadNavigation(process.argv[3])) {
+  console.log(`${page.path.slice(1)}/index.html`)
+}
+NODE
+) || fail 'Unable to validate navigation.toml.'
+while IFS= read -r file; do
+  [[ -s dist/$file ]] || fail "Missing or empty dist/$file"
+  required_files+=("$file")
+done <<< "$route_files"
 [[ -d dist/assets ]] || fail 'Missing dist/assets.'
 [[ -z $(find dist -type l -print -quit) ]] || fail 'Publish regular files, not symbolic links.'
 
@@ -76,19 +91,27 @@ rsync -rltz --chmod=D755,F644 --exclude='.DS_Store' \
   -e "ssh -F '$ssh_dir/config'" dist/ "deploy-vps:$release/"
 
 
+# Paths come from the validated /docs endpoint format, so they contain no
+# shell metacharacters. Pass the identical file list to the remote checks.
+activation_command="bash -se -- '$VPS_PATH' '$RELEASE_ID'"
+for file in "${required_files[@]}"; do
+  activation_command+=" '$file'"
+done
 # GNU mv -T replaces the link itself atomically on the same filesystem.
-ssh -F "$ssh_dir/config" deploy-vps "bash -se -- '$VPS_PATH' '$RELEASE_ID'" <<'REMOTE'
+ssh -F "$ssh_dir/config" deploy-vps "$activation_command" <<'REMOTE'
 set -euo pipefail
 base=$1
-release="$base/releases/$2"
-for file in index.html 404.html docs/index.html guide/modlog/index.html; do
+release_id=$2
+release="$base/releases/$release_id"
+shift 2
+for file in "$@"; do
   test -s "$release/$file"
 done
 test -d "$release/assets"
 
-next="$base/.current-$2"
-ln -s "releases/$2" "$next"
+next="$base/.current-$release_id"
+ln -s "releases/$release_id" "$next"
 mv -Tf "$next" "$base/current"
-printf 'Activated release %s\n' "$2"
+printf 'Activated release %s\n' "$release_id"
 REMOTE
 
