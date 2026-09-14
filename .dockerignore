@@ -1,0 +1,13 @@
+node_modules
+dist
+.git
+.DS_Store
+**/.DS_Store
+src/generated
+public/assets
+.sites-runtime
+.codex
+.agents
+.env
+.env.*
+npm-debug.log*

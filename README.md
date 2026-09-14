@@ -1,45 +1,108 @@
-# Lightning
+# Lightning Website
 
-Moderation that feels fast, modern, and actually fun to use.
+A custom Vue 3 application styled with Tailwind CSS 4, built with Vite. Documentation remains in the existing Markdown files; no GitBook account or service is required.
 
-Lightning helps Discord communities stay safe without turning setup into a part-time job.
+## Local development
 
-### Why choose Lightning?
+Use Node.js 22.12+ and npm.
 
-Most moderation bots make you choose between power and simplicity.
+```sh
+npm ci
+npm run dev
+```
 
-Lightning gives you both:
-- Strong moderation tools for real-world server chaos
-- Friendly configuration flows instead of confusing setup files
-- One bot that covers the essentials, so your staff can move faster
+Vite prints the preview URL. Markdown and SUMMARY.md changes regenerate the content and reload the preview.
 
-Whether you run a small community or a large public server, Lightning is built to keep moderation clear, consistent, and scalable.
+```sh
+npm test
+npm run build
+npm run preview
+```
 
-### Features that staff teams love
+The build writes a standalone static website to `dist/`. Deploy that directory to a static host with directory-index support. Each documentation path has its own `index.html`, with readable article content before JavaScript loads. Configure the host to use `404.html` for unknown pages. No server, database, account, or secret is needed. The site currently expects to be served at the domain root.
 
-- **Flexible Mod Logs:** Use multiple channels and formats for clean, useful moderation history.
-- **Custom AutoMod Rules:** Tune spam and abuse protection to match your server's culture.
-- **Audit-Log-Aware Events:** Keep moderation context organized and easier to review.
-- **Multiple Mod Log Channels:** Split public transparency logs and private staff logs.
-- **Built for Practical Moderation:** Focuses on workflows moderators actually use every day.
+## Adding and editing pages
 
-### No premium or vote-locked features
+1. Edit an existing Markdown file or add a new one.
+2. Add its link under a section in `SUMMARY.md`. This determines navigation and previous/next order.
+3. Use relative Markdown links, such as `[AutoMod](automod-configuration.md)` inside `guide/`. The compiler converts these to documentation routes and checks that targets exist.
+4. Store screenshots and recordings in `assets/` and reference them with relative paths.
+5. Run the tests and build before publishing.
 
-Lightning's core moderation features are available without premium gates.
+`README.md` maps to `/docs`; other files map to extensionless routes. For example, `guide/modlog.md` maps to `/guide/modlog`. Existing Markdown source URLs are also included in the output as source files.
 
-If you enjoy the bot, consider donating on [Ko-Fi](https://ko-fi.com/lightsage) so I can keep the bot free!
+The compiler supports GitBook hints (info, warning, danger), format tabs (converted to keyboard-accessible disclosure panels), and embeds (converted to labeled external links). Unknown GitBook directives fail the build so unsupported content cannot silently disappear. Markdown tables and existing HTML tables are supported. HTML is sanitized before rendering.
 
-### Fully open source
+Heading IDs are generated from the heading text; duplicate headings get numeric suffixes. Keep headings stable when inbound anchor links matter. Missing document or image files fail compilation. External URLs and anchor destinations are not automatically checked.
 
-Lightning is fully open source. Explore the codebase here:
-<https://github.com/lightning-bot/Lightning>
+## Application structure
 
-### Ready to power up your server?
+- `scripts/content.mjs`: SUMMARY navigation, Markdown conversion, sanitization, heading extraction, asset copying, and search text.
+- `src/App.vue`: reading layout, routes, local search dialog, mobile navigation, code copying, and page outline.
+- `src/style.css`: Tailwind and shared design styles inspired by celveren.dev.
+- `scripts/prerender.mjs`: static pages and the 404 document.
+- `tests/content.test.mjs`: content compatibility and safety checks.
 
-Invite Lightning:
-<https://discord.com/oauth2/authorize?client_id=532220480577470464>
+Generated content, copied assets, dependencies, and build output are ignored by Git. Commit `package-lock.json` for reproducible installs.
 
-### Need help or have ideas?
+Documentation search is temporarily disabled. The application does not render a search dialog, register a search shortcut, or import the search engine. The custom JavaScript engine in `src/search.js` and its tests remain available for future re-enablement.
 
-Join the support server:
-[https://short.lightsage.dev/discord](https://short.lightsage.dev/discord)
+The typography uses Manrope and Cormorant Garamond from Google Fonts, with local system fallbacks. The palette and type pairing follow Célveren's branding; the documentation layout and interface are purpose-built for Lightning.
+
+## Themes
+
+Dark mode uses muted amber-orange (`#e89a62`) for primary actions and accents, with a lighter `#f0b58a` for accent text. Light mode uses Célveren’s green (`#385c30`), pale background (`#f4f7f5`), and green ink (`#18251f`). Shared CSS tokens in `src/style.css` cover all surfaces. The header theme button follows the operating system by default and saves explicit choices locally under `lightning-theme`. Theme initialization runs before rendering to avoid a flash of the wrong palette.
+
+## Docker Compose
+
+Docker builds the Vue site in a Node 22 stage, runs the content tests, and copies only the finished static files into Nginx. Node and the source files are not needed at runtime.
+
+```sh
+docker compose up --build -d
+```
+
+Open http://localhost:8080. The default port binds to localhost. To change the port:
+
+```sh
+DOCS_PORT=8090 docker compose up --build -d
+```
+
+To expose the site on your host’s network interfaces, set `DOCS_BIND_ADDRESS=0.0.0.0`. These variables may also be set in a local `.env` file (do not commit it). For HTTPS, place the service behind your existing TLS reverse proxy.
+
+```sh
+docker compose logs -f docs
+docker compose ps
+docker compose down
+```
+
+Without Watch, run `docker compose up --build -d` again after changing documentation or application files. No volumes are required. Nginx serves the prerendered routes and returns a real 404 for unknown pages; `/healthz` provides the container health check. Base image tags track Node 22 and stable Nginx; use `docker compose build --pull` to refresh them.
+
+## Marketing page
+
+The main `/` route is the public marketing page, authored in `src/marketing.html` and shared between Vue and the static build. The documentation Welcome page lives at `/docs`. Existing guide, reference, and policy URLs remain unchanged. Both surfaces share the theme switch and favicon. Docker serves both from the same build.
+
+The Welcome page uses its dedicated introduction and guide cards. `src/welcome.md` provides matching static content, search text, and the page outline; `README.md` is retained as a repository document and is not rendered on Welcome.
+
+Documentation readers can choose Standard (16px body), Large (18px), or Largest (20px) in the header. Sizes use rem units to respect browser font settings. The preference is saved locally as `lightning-docs-text-size`. Scaling is scoped to documentation content, navigation, and search; the marketing page and navbar wordmark are unaffected. Static documentation also uses the comfortable default size.
+
+## Docker Compose Watch
+
+Start the site and watch local changes with Docker Compose 2.22 or newer:
+
+```sh
+docker compose up --build --watch
+```
+
+Or, if the service is already running in the background:
+
+```sh
+docker compose watch
+```
+
+Edits to application code, Markdown, assets, dependencies, build scripts, the Dockerfile, or Nginx configuration rebuild the image and recreate the docs container. The existing Docker build runs the content tests before producing the site. Refresh your browser after the rebuild finishes; this production Nginx setup does not provide browser hot reload.
+
+Generated output, installed dependencies, Git metadata, and local environment files are excluded to prevent rebuild loops. Changes to `compose.yaml` or `.env` require restarting Compose manually. `ENGINE.md` is excluded because it is contributor documentation, not site content. Stop foreground Watch with Ctrl+C; use `docker compose down` to remove the service when finished.
+
+Documentation readers can personalize command examples using **Default prefix (.)**, **Slash commands (/)**, or **Custom prefix** above the article. The preference is saved locally as `lightning-docs-prefix` and applies across pages, including copied code. Only command prefixes in code examples change; links, arguments, and source Markdown remain intact. This display preference does not configure Lightning or guarantee slash-command availability.
+
+Write personalizable commands as `{{ selected_prefix }}ban @Member` in inline code, fenced code blocks, or HTML table code cells. `src/command-prefix.js` replaces only this exact marker inside code elements, HTML-escapes the selected prefix, and never compiles documentation as a Vue template. Literal examples (such as the mention command used to configure a prefix) stay unchanged. Static pages render markers with `.` before JavaScript loads.

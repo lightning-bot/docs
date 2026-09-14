@@ -2,8 +2,6 @@
 
 Lightning can log moderation activity to one or more channels. You can choose exactly which events go to which channel.
 
-To get started, run the `modlog` command and follow the prompts.
-
 ## Quick setup
 
 1. Run `modlog`.
@@ -11,7 +9,7 @@ To get started, run the `modlog` command and follow the prompts.
 3. Select the events you want logged.
 4. Pick a log format.
 
-## Events
+## Event Reference
 
 Lightning currently supports these events:
 
@@ -60,7 +58,7 @@ An emoji-based style.
 {% endtab %}
 {% endtabs %}
 
-To change format later, run `.modlog` again and update your settings.
+To change format later, run `{{ selected_prefix }}modlog` again and update your settings.
 
 ## Tips
 

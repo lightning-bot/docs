@@ -4,7 +4,7 @@ Gatekeeper is Lightning's member verification system. It helps block spam and sc
 
 ## Set Up
 
-To enable Gatekeeper, run `@Lightning automod gatekeeper` and complete the setup buttons in the UI.
+To enable Gatekeeper, run `{{ selected_prefix }}automod gatekeeper` and complete the setup buttons in the UI.
 
 During setup, you will choose:
 
@@ -27,10 +27,10 @@ During setup, you will choose:
 When a new member joins, Lightning immediately applies your verification role. That role keeps them restricted until they go to your verification channel and complete verification. After they verify, Lightning removes the verification role and they can access the rest of the server.
 
 #### What happens if I delete the designated verification role?
-Pending members may no longer be restricted properly, and Gatekeeper will disable itself. Re-run `@Lightning automod gatekeeper` to configure a new verification role.
+Pending members may no longer be restricted properly, and Gatekeeper will disable itself. Re-run `{{ selected_prefix }}automod gatekeeper` to configure a new verification role.
 
 #### What happens if I delete the verification channel?
-Pending members will not be able to verify. Create/configure a new channel, then re-run `@Lightning automod gatekeeper` to resend the verification message.
+Pending members will not be able to verify. Create/configure a new channel, then re-run `{{ selected_prefix }}automod gatekeeper` to resend the verification message.
 
 ## Quick troubleshooting
 

@@ -27,13 +27,13 @@ If you do not set a mute role, Lightning will use timeouts for timed mutes. If t
 
 If your server already has a Muted role, set it with:
 
-`@Lightning config muterole <role>`
+`{{ selected_prefix }}config muterole <role>`
 
 If you do not have one yet:
 
 1. Create a new role in Server Settings (for example: `Muted`).
-2. Run `@Lightning config muterole <role>`.
-3. Run `@Lightning config muterole update` to apply channel permission overrides.
+2. Run `{{ selected_prefix }}config muterole <role>`.
+3. Run `{{ selected_prefix }}config muterole update` to apply channel permission overrides.
 
 ## What to do next
 

@@ -1,0 +1,21 @@
+services:
+  docs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${DOCS_BIND_ADDRESS:-127.0.0.1}:${DOCS_PORT:-8080}:80"
+    restart: unless-stopped
+    develop:
+      watch:
+        # Nginx serves compiled files, so source changes require a new image.
+        # Compose also applies .dockerignore to this watched build context.
+        - action: rebuild
+          path: .
+          ignore:
+            - src/generated/
+            - public/assets/
+            - .env
+            - .env.*
+            - compose.yaml
+            - ENGINE.md

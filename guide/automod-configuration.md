@@ -6,6 +6,8 @@ You can use both slash commands (recommended) and prefix commands:
 - Slash: `/automod ...`
 - Prefix: `.automod ...`
 
+The examples below follow the command prefix selected above.
+
 {% hint style="info" %}
 You need Manage Server permission access to configure AutoMod.
 {% endhint %}
@@ -15,7 +17,7 @@ You need Manage Server permission access to configure AutoMod.
 1. Open the interactive setup:
 
 ```
-/automod rules interactive
+{{ selected_prefix }}automod rules interactive
 ```
 
 2. Create one or two core rules:
@@ -25,13 +27,13 @@ You need Manage Server permission access to configure AutoMod.
 3. Add channels/roles you want ignored:
 
 ```
-/automod ignore #staff @moderators
+{{ selected_prefix }}automod ignore #staff @moderators
 ```
 
 4. Check your final setup:
 
 ```
-/automod view
+{{ selected_prefix }}automod view
 ```
 
 ---
@@ -46,7 +48,7 @@ Each advanced rule uses:
 Example:
 
 ```
-/automod rules add message-spam 5/10s warn
+{{ selected_prefix }}automod rules add message-spam 5/10s warn
 ```
 
 This means: on the 5th message in 10 seconds, AutoMod triggers.
@@ -58,7 +60,7 @@ You can write intervals in two formats:
 If you use `mute` or `ban`, you can add a duration:
 
 ```
-/automod rules add message-spam 5/10s mute 30m
+{{ selected_prefix }}automod rules add message-spam 5/10s mute 30m
 ```
 
 ---
@@ -80,8 +82,8 @@ If you use `mute` or `ban`, you can add a duration:
 Common commands:
 
 ```
-/automod rules add <rule> <count>/<seconds>s <delete|warn|mute|kick|ban> [duration]
-/automod rules remove <rule>
+{{ selected_prefix }}automod rules add <rule> <count>/<seconds>s <delete|warn|mute|kick|ban> [duration]
+{{ selected_prefix }}automod rules remove <rule>
 ```
 
 ---
@@ -98,8 +100,8 @@ Basic rules do not use a rate limit. They are simple on/off protections.
 Commands:
 
 ```
-/automod rules addbasic <auto-dehoist|auto-normalize>
-/automod rules remove <auto-dehoist|auto-normalize>
+{{ selected_prefix }}automod rules addbasic <auto-dehoist|auto-normalize>
+{{ selected_prefix }}automod rules remove <auto-dehoist|auto-normalize>
 ```
 
 ---
@@ -111,16 +113,16 @@ You can exclude roles, members, channels, and threads from AutoMod.
 Commands:
 
 ```
-/automod ignore <entities...>
-/automod unignore <entities...>
-/automod ignored
+{{ selected_prefix }}automod ignore <entities...>
+{{ selected_prefix }}automod unignore <entities...>
+{{ selected_prefix }}automod ignored
 ```
 
 Examples:
 
 ```
-/automod ignore @moderators #staff-chat
-/automod unignore #staff-chat
+{{ selected_prefix }}automod ignore @moderators #staff-chat
+{{ selected_prefix }}automod unignore #staff-chat
 ```
 
 {% hint style="info" %}
@@ -140,9 +142,9 @@ Warn threshold is a server-wide escalation rule:
 Commands:
 
 ```
-/automod warnthreshold set <1-10> <kick|ban>
-/automod warnthreshold remove
-/automod warnthreshold migrate
+{{ selected_prefix }}automod warnthreshold set <1-10> <kick|ban>
+{{ selected_prefix }}automod warnthreshold remove
+{{ selected_prefix }}automod warnthreshold migrate
 ```
 
 ---
@@ -154,7 +156,7 @@ Gatekeeper restricts new members until they verify.
 Start setup:
 
 ```
-/automod gatekeeper
+{{ selected_prefix }}automod gatekeeper
 ```
 
 The setup UI lets you:
@@ -177,9 +179,9 @@ Lightning needs Manage Roles and Manage Channels to run Gatekeeper setup and kee
 ## Troubleshooting
 
 - **"This rule has already been set up"**: remove it first, then add it again.
-- **AutoMod not triggering**: check `/automod view`, then confirm the user/channel/role is not ignored.
+- **AutoMod not triggering**: check `{{ selected_prefix }}automod view`, then confirm the user/channel/role is not ignored.
 - **Muted users are not being muted**: ensure your mute role/config is valid if timeout cannot be used.
-- **Not sure what is active?** use `/automod view`.
+- **Not sure what is active?** use `{{ selected_prefix }}automod view`.
 
 ## Recommended starter profile
 

@@ -1,3 +1,11 @@
 .git
 .DS_Store
 Thumbs.db
+node_modules/
+dist/
+src/generated/
+public/assets/
+.sites-runtime/
+
+.env
+.env.*

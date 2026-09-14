@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0a1018"><meta name="description" content="Guides and command reference for Lightning, the open-source Discord moderation bot."><script>
+(function(){
+  var theme;
+  try{theme=localStorage.getItem('lightning-theme')}catch(e){}
+  if(theme!=='light'&&theme!=='dark')theme=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+  document.documentElement.dataset.theme=theme;
+  document.querySelector('meta[name="theme-color"]').content=theme==='light'?'#f4f7f5':'#0a1018';
+})();
+</script><title>Lightning documentation</title><link rel="icon" type="image/png" href="/assets/lightning-favicon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"></head><body><div id="app"><!--prerender--></div><script type="module" src="/src/main.js"></script></body></html>

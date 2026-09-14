@@ -4,7 +4,7 @@ Lightning includes a built-in system for members to report suspicious or rule-br
 
 ## Set Up
 
-Run `@Lightning reportsetup`.
+Run `{{ selected_prefix }}reportsetup`.
 
 Click **Set report channel**, then select where reports should be sent.
 
