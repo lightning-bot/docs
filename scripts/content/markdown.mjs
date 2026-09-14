@@ -12,7 +12,7 @@ import { finalizeHtml } from './metadata.mjs'
  * Context includes { md, root, file, env }; env is fresh for every document.
  * HTML always passes through the shared sanitizer after the final hook.
  */
-export function createMarkdownCompiler({ root, extensions = [], gitbook = true } = {}) {
+export function createMarkdownCompiler({ root, extensions = [], gitbook = true, resolveRoute } = {}) {
   if (!root) throw new TypeError('Markdown compiler requires a content root')
   const plugins = [...(gitbook ? [gitbookExtension] : []), ...extensions]
   const names = new Set()
@@ -38,7 +38,7 @@ export function createMarkdownCompiler({ root, extensions = [], gitbook = true }
   }
 
   return function compile(source, file) {
-    const context = { md, root, file, env: {} }
+    const context = { md, root, file, resolveRoute, env: {} }
     try {
       source = transform('preprocess', source, context, value => typeof value === 'string')
       validateDirectives(source, file)

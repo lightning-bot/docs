@@ -1,0 +1,59 @@
+# Documentation navigation. Group and page order control the sidebar.
+
+[Overview]
+
+[[Overview.pages]]
+title = "Welcome"
+file = "README.md"
+path = "/docs"
+
+[Guide]
+
+[[Guide.pages]]
+title = "Getting Started"
+file = "guide/getting-started.md"
+path = "/docs/getting-started"
+
+[[Guide.pages]]
+title = "ModLog Configuration"
+file = "guide/modlog.md"
+path = "/docs/modlog"
+
+[[Guide.pages]]
+title = "AutoMod Configuration"
+file = "guide/automod-configuration.md"
+path = "/docs/automod-configuration"
+
+[[Guide.pages]]
+title = "Message Report Configuration"
+file = "guide/reports-configuration.md"
+path = "/docs/reports-configuration"
+
+[[Guide.pages]]
+title = "Gatekeeper Configuration"
+file = "guide/gatekeeper-configuration.md"
+path = "/docs/gatekeeper-configuration"
+
+[Reference]
+
+[[Reference.pages]]
+title = "Moderation"
+file = "reference/moderation.md"
+path = "/docs/reference/moderation"
+
+[[Reference.pages]]
+title = "Command List"
+file = "reference/command-list.md"
+path = "/docs/reference/command-list"
+
+[Policies]
+
+[[Policies.pages]]
+title = "Terms of Service"
+file = "tos.md"
+path = "/docs/app/tos"
+
+[[Policies.pages]]
+title = "Privacy Policy"
+file = "privacy-policy.md"
+path = "/docs/app/privacy-policy"

@@ -88,7 +88,7 @@ Check access using the actual Nginx worker account (`nginx` or `www-data`, depen
 ```sh
 sudo -u nginx test -r /var/www/lightning-docs/current/index.html
 sudo -u nginx test -r /var/www/lightning-docs/current/docs/index.html
-sudo -u nginx test -r /var/www/lightning-docs/current/guide/modlog/index.html
+sudo -u nginx test -r /var/www/lightning-docs/current/docs/modlog/index.html
 ```
 
 ## 4. Add the Lightning Nginx virtual host
@@ -122,7 +122,7 @@ Back up the affected configuration outside the enabled include directories, then
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
-Check `https://lightningbot.app/`, `/docs`, `/guide/modlog`, a generated CSS/JavaScript asset, and an unknown nested URL (which must return 404). Verify the portfolio still responds normally. GitHub reports release activation, not DNS/TLS readiness or live-site health; no live HTTP check or automatic rollback is performed.
+Check `https://lightningbot.app/`, `/docs`, `/docs/modlog`, a generated CSS/JavaScript asset, and an unknown nested URL (which must return 404). Verify the portfolio still responds normally. GitHub reports release activation, not DNS/TLS readiness or live-site health; no live HTTP check or automatic rollback is performed.
 
 ## Rollback and retention
 

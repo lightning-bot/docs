@@ -2,10 +2,12 @@
 import {computed,ref,watch,nextTick,onMounted,onUnmounted} from 'vue'
 import {useRoute,useRouter} from 'vue-router'
 import pages from './generated/content.json'
-import marketing from './marketing.html?raw'
+import marketingSource from './marketing.html?raw'
 import CrossoverIntro from './CrossoverIntro.vue'
 import {personalizeCommands} from './command-prefix.js'
 import {previewClick,previewOver,previewOut} from './preview-card.js'
+import {pagePath,resolvePageLinks} from './page-links.js'
+const marketing=resolvePageLinks(marketingSource,pages)
 const route=useRoute(),router=useRouter()
 const isMarketing=computed(()=>route.path==='/')
 const textSizes=[{value:'standard',label:'Standard',scale:1},{value:'large',label:'Large',scale:1.125},{value:'largest',label:'Largest',scale:1.25}]
@@ -44,7 +46,7 @@ function keys(e){if(e.key==='Escape')menu.value=false}
 async function articleClick(e){const copy=e.target.closest('button[data-copy]');if(copy){try{await navigator.clipboard.writeText(copy.parentElement.querySelector('code').textContent);status.value='Command copied';copy.textContent='Copied';setTimeout(()=>copy.textContent='Copy',1600)}catch{status.value='Unable to copy. Select the command to copy it manually.'}return}const a=e.target.closest('a');if(a && a.origin===location.origin && !e.metaKey&&!e.ctrlKey&&!e.shiftKey&&!e.altKey&&e.button===0){e.preventDefault();router.push(a.pathname+a.hash)}}
 watch([()=>route.fullPath,articleHtml],async()=>{menu.value=false;document.title=isMarketing.value?'Lightning · Discord moderation, without the friction':page.value?`${page.value.title} · Lightning`:'Page not found · Lightning';await nextTick();document.querySelectorAll('.prose pre').forEach(pre=>{if(pre.querySelector('button'))return;const b=document.createElement('button');b.textContent='Copy';b.dataset.copy='';b.setAttribute('aria-label','Copy code');pre.append(b)})},{immediate:true})
 onMounted(()=>window.addEventListener('keydown',keys));onUnmounted(()=>window.removeEventListener('keydown',keys))
-const cards=[{path:'/guide/getting-started',label:'01',title:'Getting started',text:'Invite Lightning and get your server ready for moderation.'},{path:'/guide/automod-configuration',label:'02',title:'Configure AutoMod',text:'Set up practical protection against spam and abuse.'},{path:'/guide/modlog',label:'03',title:'Keep a clear record',text:'Choose the events and log formats your staff needs.'},{path:'/reference/command-list',label:'04',title:'Command reference',text:'Find commands, aliases, and usage in one place.'}]
+const cards=[{path:pagePath(pages,'guide/getting-started.md'),label:'01',title:'Getting started',text:'Invite Lightning and get your server ready for moderation.'},{path:pagePath(pages,'guide/automod-configuration.md'),label:'02',title:'Configure AutoMod',text:'Set up practical protection against spam and abuse.'},{path:pagePath(pages,'guide/modlog.md'),label:'03',title:'Keep a clear record',text:'Choose the events and log formats your staff needs.'},{path:pagePath(pages,'reference/command-list.md'),label:'04',title:'Command reference',text:'Find commands, aliases, and usage in one place.'}]
 </script>
 <template>
   <CrossoverIntro v-if="isMarketing" />
@@ -73,7 +75,7 @@ const cards=[{path:'/guide/getting-started',label:'01',title:'Getting started',t
       <template v-if="page">
         <div class="breadcrumb flex items-center gap-3"><span>Documentation</span><span>/</span><span>{{page.group==='Overview'?'Welcome':page.group}}</span></div>
         <template v-if="page.path==='/docs'">
-          <div class="welcome"><p class="eyebrow">THE LIGHTNING HANDBOOK</p><h1>Good communities.<br><em>Great moderation.</em></h1><p>Everything you need to set up Lightning and keep your Discord community safe. A little guidance goes a long way.</p><RouterLink class="primary-link" to="/guide/getting-started">Set up your server <span>→</span></RouterLink></div>
+          <div class="welcome"><p class="eyebrow">THE LIGHTNING HANDBOOK</p><h1>Good communities.<br><em>Great moderation.</em></h1><p>Everything you need to set up Lightning and keep your Discord community safe. A little guidance goes a long way.</p><RouterLink class="primary-link" :to="pagePath(pages,'guide/getting-started.md')">Set up your server <span>→</span></RouterLink></div>
           <div class="section-label flex justify-between"><h2 id="find-your-starting-point">Find your starting point</h2><span>THE ESSENTIALS</span></div>
           <div class="cards grid sm:grid-cols-2 gap-4"><RouterLink v-for="card in cards" :key="card.path" :to="card.path" class="doc-card"><div class="flex justify-between"><span class="card-number">{{card.label}}</span><span class="card-arrow">↗</span></div><h3>{{card.title}}</h3><p>{{card.text}}</p></RouterLink></div>
           

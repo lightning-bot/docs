@@ -1,7 +1,7 @@
-import {resolveContentPath, routeFor} from './routes.mjs'
+import {resolveContentPath} from './routes.mjs'
 import {validateTarget} from './validation.mjs'
 
-export function processTokens(tokens, {root, file}) {
+export function processTokens(tokens, {root, file, resolveRoute}) {
   const headings = []; const ids = new Map()
   for(let i=0;i<tokens.length;i++) {
     const t=tokens[i]
@@ -18,7 +18,8 @@ export function processTokens(tokens, {root, file}) {
       const [target,hash]=href.split('#'); const resolved=resolveContentPath(file,target)
       if(target.endsWith('.md')) {
         validateTarget(root,resolved,file,href)
-        c.attrSet(attr,routeFor(resolved)+(hash?'#'+hash:''))
+        if (!resolveRoute) throw new Error(`No navigation resolver for Markdown link: ${href}`)
+        c.attrSet(attr,resolveRoute(resolved)+(hash?'#'+hash:''))
       } else if(c.type==='image') { validateTarget(root,resolved,file,href,true); c.attrSet(attr,'/'+resolved) }
     }
   }

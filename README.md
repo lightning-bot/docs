@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Vite prints the preview URL. Markdown and SUMMARY.md changes regenerate the content and reload the preview.
+Vite prints the preview URL. Markdown and navigation.toml changes regenerate the content and reload the preview.
 
 ```sh
 npm test
@@ -24,12 +24,25 @@ The build writes a standalone static website to `dist/`. Deploy that directory t
 ## Adding and editing pages
 
 1. Edit an existing Markdown file or add a new one.
-2. Add its link under a section in `SUMMARY.md`. This determines navigation and previous/next order.
+2. Add its entry under a group in `navigation.toml`. This determines navigation and previous/next order.
 3. Use relative Markdown links, such as `[AutoMod](automod-configuration.md)` inside `guide/`. The compiler converts these to documentation routes and checks that targets exist.
 4. Store screenshots and recordings in `assets/` and reference them with relative paths.
 5. Run the tests and build before publishing.
 
-`README.md` maps to `/docs`; other files map to extensionless routes. For example, `guide/modlog.md` maps to `/guide/modlog`. Existing Markdown source URLs are also included in the output as source files.
+Define navigation in `navigation.toml`. Use a top-level named table for each group, with a `pages` array beneath it. Group names become sidebar headings; groups and pages appear in declaration order:
+
+```toml
+[Guide]
+
+[[Guide.pages]]
+title = "Getting Started"
+file = "guide/getting-started.md"
+path = "/docs/getting-started"
+```
+
+Every page requires a title, a repository-relative Markdown file, and an explicit endpoint. Group names, source files, and endpoints must be unique. Group names must be nonempty and cannot be numeric. For example, `[Policies]` with `[[Policies.pages]]` is accessible as `config.Policies.pages` after parsing. Endpoints must be under `/docs`, with lowercase letters, digits, hyphens, or underscores in each segment. Welcome uses `README.md` at `/docs` and loads its content from `src/welcome.md`. Source file paths do not need to match endpoints.
+
+Navigation, previous/next links, Markdown page links, and homepage links follow the configuration automatically. Markdown links to pages missing from navigation fail the build. Existing Markdown source URLs remain included in the output as source files. Saving the TOML file regenerates content and reloads the development preview; invalid configuration reports an error, and correcting it restores the preview.
 
 The compiler supports GitBook hints (info, warning, danger), format tabs (converted to keyboard-accessible disclosure panels), and embeds (converted to labeled external links). Unknown GitBook directives fail the build so unsupported content cannot silently disappear. Markdown tables and existing HTML tables are supported. HTML is sanitized before rendering.
 
@@ -37,7 +50,7 @@ Heading IDs are generated from the heading text; duplicate headings get numeric 
 
 ## Application structure
 
-- `scripts/content.mjs`: SUMMARY navigation, Markdown conversion, sanitization, heading extraction, asset copying, and search text.
+- `scripts/content.mjs`: TOML navigation, Markdown conversion, sanitization, heading extraction, asset copying, and search text.
 - `src/App.vue`: reading layout, routes, local search dialog, mobile navigation, code copying, and page outline.
 - `src/style.css`: Tailwind and shared design styles inspired by celveren.dev.
 - `scripts/prerender.mjs`: static pages and the 404 document.

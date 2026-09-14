@@ -1,12 +1,13 @@
 
 ## Extending Markdown
 
-`scripts/content.mjs` remains the build entry point and exports the existing `compile`, `generate`, and `routeFor` API. Compiler internals now live under `scripts/content/`:
+`scripts/content.mjs` remains the build entry point and exports `compile`, `generate`, and `loadNavigation`. Compiler internals now live under `scripts/content/`:
 
 - `markdown.mjs`: compiler factory and ordered extension pipeline.
 - `gitbook.mjs`: legacy hints, tabs, and embed conversion.
 - `tokens.mjs`: heading IDs and document/asset links.
-- `routes.mjs`: route naming and relative content paths.
+- `navigation.mjs`: TOML configuration, validation, and explicit page routes.
+- `routes.mjs`: relative content paths.
 - `validation.mjs`: unsupported directives and missing targets.
 - `metadata.mjs`: final HTML sanitization and search metadata.
 
@@ -31,7 +32,7 @@ Hooks run in array order:
 3. `transformTokens(tokens, context)` returns the token array. Standard heading and link processing runs afterward.
 4. `transformHtml(html, context)` returns HTML before the final sanitizer.
 
-Context contains `{ md, root, file, env }`. Use `env` for per-document state; it is fresh for each compilation. Hook transforms must return their value, even when modifying it in place. Async transforms are unsupported and fail with a file-specific error.
+Context contains `{ md, root, file, resolveRoute, env }`. Standalone compilers that process Markdown page links must receive a `resolveRoute(file)` function; the site compiler supplies this from navigation. Use `env` for per-document state; it is fresh for each compilation. Hook transforms must return their value, even when modifying it in place. Async transforms are unsupported and fail with a file-specific error.
 
 The sanitizer remains mandatory. If a feature needs new HTML elements or attributes, explicitly review and update the allowlist in `metadata.mjs`. HTML transforms should not change heading IDs or link targets: use token transforms so headings, validation, and search remain aligned. Plugins execute as trusted build code, not sandboxed user content.
 
