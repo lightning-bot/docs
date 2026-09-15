@@ -70,7 +70,7 @@ const cards=[{path:pagePath(pages,'guide/getting-started.md'),label:'01',title:'
   </header>
   <div v-if="isMarketing" v-html="marketing" @click="previewClick" @pointerover="previewOver" @pointerout="previewOut"></div>
   <div v-else class="layout docs-reading" :style="readingStyle">
-    <aside id="sidebar" class="sidebar" :class="{open:menu}"><nav aria-label="Documentation"><section v-for="group in groups" :key="group"><h2>{{group}}</h2><RouterLink v-for="p in pages.filter(p=>p.group===group)" :key="p.path" :to="p.path" :class="{active:page?.path===p.path}" :aria-current="page?.path===p.path?'page':undefined"><span>{{p.title}}</span><span v-if="page?.path===p.path" aria-hidden="true">↗</span></RouterLink></section></nav><div class="sidebar-footer"><a href="https://celveren.dev">A project by Célveren</a></div></aside>
+    <aside id="sidebar" class="sidebar" :class="{open:menu}"><nav aria-label="Documentation"><section v-for="group in groups" :key="group"><h2>{{group}}</h2><RouterLink v-for="p in pages.filter(p=>p.group===group)" :key="p.path" :to="p.path" :class="{active:page?.path===p.path}" :aria-current="page?.path===p.path?'page':undefined"><span>{{p.title}}</span></RouterLink></section></nav><div class="sidebar-footer"><a href="https://celveren.dev">A project by Célveren</a></div></aside>
     <main id="main" tabindex="-1">
       <template v-if="page">
         <div class="breadcrumb flex items-center gap-3"><span>Documentation</span><span>/</span><span>{{page.group==='Overview'?'Welcome':page.group}}</span></div>
