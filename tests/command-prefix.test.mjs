@@ -16,9 +16,9 @@ test('escapes injected HTML and does not evaluate template syntax',()=>{
 })
 test('compiled inline, fenced and table examples use selected or static default prefix',()=>{
   const {html}=compile('`{{ selected_prefix }}help`\n\n```\n{{ selected_prefix }}ban @Member\n```\n\n<table><tr><td><code>{{ selected_prefix }}config</code></td></tr></table>','reference/moderation.md')
-  for(const prefix of ['/', '!!', null]){
+  for(const prefix of ['/', '!!', null, undefined]){
     const rendered=personalizeCommands(html,prefix)
     assert.ok(!rendered.includes('{{ selected_prefix }}'))
-    for(const command of ['help','ban','config'])assert.ok(rendered.includes((prefix??'.')+command))
+    for(const command of ['help','ban','config'])assert.ok(rendered.includes((prefix??'@Lightning ')+command))
   }
 })

@@ -82,11 +82,11 @@ const cards=[{path:pagePath(pages,'guide/getting-started.md'),label:'01',title:'
         </template>
         <div class="prefix-control" aria-label="Command example preferences">
           <div class="prefix-fields"><label for="command-style">Command examples</label>
-            <select id="command-style" v-model="prefixMode" aria-describedby="prefix-help"><option value="original">Default prefix (.)</option><option value="slash">Slash commands (/)</option><option value="custom">Custom prefix</option></select>
+            <select id="command-style" v-model="prefixMode" aria-describedby="prefix-help"><option value="original">Default mention (@Lightning)</option><option value="slash">Slash commands (/)</option><option value="custom">Custom prefix</option></select>
             <label v-if="prefixMode==='custom'" for="custom-prefix">Your prefix</label>
             <input v-if="prefixMode==='custom'" id="custom-prefix" v-model="customPrefix" type="text" maxlength="32" placeholder="." autocomplete="off" spellcheck="false" aria-describedby="prefix-help" />
           </div>
-          <p id="prefix-help">Personalizes examples only. Slash command availability and options may differ. <span v-if="prefixMode==='custom'&&!customPrefix.trim()">Enter a prefix; examples currently use a dot (.).</span></p>
+          <p id="prefix-help">Personalizes examples only. <span v-if="prefixMode==='original'">Select Lightning from Discord’s mention suggestions, then add a space before the command. Pasted text alone may not create a mention.</span> Slash command availability and options may differ. <span v-if="prefixMode==='custom'&&!customPrefix.trim()">Enter a prefix; examples currently use a dot (.).</span></p>
         </div>
         <article v-if="page.path!=='/docs'" class="prose" v-html="articleHtml" @click="articleClick"></article>
         <div v-if="page.path!=='/docs'" class="article-meta flex justify-between gap-4"><span>Made for community moderators.</span><a :href="`https://github.com/lightning-bot/docs/edit/master/${page.file}`">Edit this page</a></div>

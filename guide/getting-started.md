@@ -15,6 +15,10 @@ Need a hand? Join the [support server](https://short.lightsage.dev/discord).
 
 By default, Lightning always responds to its mention (`@Lightning`). This mention prefix cannot be removed.
 
+The guide shows this as `@Lightning help`. In Discord, type `@Lightning` and select the bot from the mention suggestions, then type a space and the command (for example, `help`). Copying the example as plain text may not create an actual mention.
+
+Command examples use the mention prefix by default. If your server has a custom prefix, choose **Custom prefix** above the article to match it.
+
 You can also add one or more custom prefixes.
 
 Run `@Lightning config prefix` & click on the Add Prefix button to add a new custom prefix.
