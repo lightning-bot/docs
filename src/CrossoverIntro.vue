@@ -3,7 +3,10 @@ import {ref,onMounted,onUnmounted,nextTick} from 'vue'
 const intro=ref(null)
 const motion=window.matchMedia('(prefers-reduced-motion: reduce)')
 let timer,previousOverflow,started=false
-function remember(){try{sessionStorage.setItem('lightning-intro-seen','1')}catch{}}
+function remember(){
+  try{localStorage.setItem('lightning-intro-seen','1')}catch{}
+  try{sessionStorage.setItem('lightning-intro-seen','1')}catch{}
+}
 function finish(){
   clearTimeout(timer)
   if(!started)return
@@ -16,8 +19,10 @@ function finish(){
 function motionChanged(event){if(event.matches)finish()}
 onMounted(async()=>{
   let seen=false
-  try{seen=sessionStorage.getItem('lightning-intro-seen')==='1'}catch{}
-  if(seen || motion.matches || location.hash)return
+  try{seen=localStorage.getItem('lightning-intro-seen')==='1'}catch{}
+  try{seen=seen || sessionStorage.getItem('lightning-intro-seen')==='1'}catch{}
+  if(seen){remember();return}
+  if(motion.matches || location.hash)return
   await nextTick()
   if(!intro.value)return
   previousOverflow=document.body.style.overflow
@@ -26,7 +31,7 @@ onMounted(async()=>{
   document.body.style.overflow='hidden'
   remember()
   motion.addEventListener('change',motionChanged)
-  timer=setTimeout(finish,5000)
+  timer=setTimeout(finish,4000)
 })
 onUnmounted(()=>{finish();motion.removeEventListener('change',motionChanged)})
 </script>
@@ -47,7 +52,7 @@ onUnmounted(()=>{finish();motion.removeEventListener('change',motionChanged)})
 <style>
 .crossover-intro{position:fixed;inset:0;width:100%;max-width:none;height:100%;height:100dvh;max-height:none;margin:0;padding:0;border:0;background:#0a1018;color:#edf3fa;overflow:hidden}
 .crossover-intro::backdrop{background:transparent}
-.crossover-intro[open]{animation:crossover-reveal .65s 4.35s ease-in-out both}
+.crossover-intro[open]{animation:crossover-reveal .65s 3.35s ease-in-out both}
 .crossover-stage{display:grid;place-items:center;min-height:100%;padding:32px;background:radial-gradient(ellipse at 25% 50%,#213b534f,transparent 55%),radial-gradient(ellipse at 75% 50%,#75432333,transparent 55%)}
 .crossover-names{position:relative;display:flex;align-items:baseline;justify-content:center;gap:clamp(20px,4vw,70px);width:100%}
 .crossover-celveren{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;letter-spacing:.3em;font-size:clamp(24px,4.3vw,76px);line-height:1.3;animation:crossover-left 1.15s cubic-bezier(.16,1,.3,1) both}
